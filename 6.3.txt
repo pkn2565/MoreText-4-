@@ -1,0 +1,61 @@
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
+
+public class MoreText extends JFrame{
+    private JTextField [] text = new JTextField[4];
+    private JLabel label;
+
+    public MoreText(){
+        text[0] = new JTextField(10);
+        label = new JLabel(" 0.0");
+        text[1] = new JTextField(10);
+        text[2] = new JTextField(10);
+        text[3] = new JTextField(10);
+        JButton button = new JButton("Add");
+        button.addActionListener(new CalculateHandle());
+
+
+        GridLayout layout = new GridLayout(2,3);
+        JPanel panel = new JPanel(layout);
+
+
+        panel.add(text[0]);
+        panel.add(text[1]);
+        panel.add(text[2]);
+        panel.add(text[3]);
+        panel.add(button);
+        setContentPane(panel);
+
+    }
+    public static void main(String[] args){
+        MoreText calc = new MoreText();
+        calc.setSize(1000,1000);
+        calc.setTitle("Calculator");
+        calc.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        calc.pack();
+        calc.setVisible(true);
+        System.out.println(calc.getInsets());
+    }
+    private class CalculateHandle implements ActionListener{
+        public void actionPerformed(ActionEvent e){
+            double in1 = Double.parseDouble(text[0].getText());
+            double in2 = Double.parseDouble(text[1].getText());
+            double in3 = Double.parseDouble(text[2].getText());
+            double in4 = Double.parseDouble(text[3].getText());
+            double result = in1 + in2 + in3 + in4;
+            DecimalFormat form = new DecimalFormat("####.00");
+            label.setText(String.valueOf(form.format(result)));
+            System.out.println("You have added " + in1 + "and" + in2 + "and your sum is " + result);
+        }
+    }
+}
+
+
+
